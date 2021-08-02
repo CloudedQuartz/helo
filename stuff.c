@@ -21,12 +21,18 @@ char cipher_shift(char shift_letter, int shift_num) {
 	for(i=0; i < shift_num; i++) {
 
 		tmp = strchr(alphabet, shift_letter);
+
+		if (!tmp)
+			continue;
+
 		index = (int)(tmp - alphabet);
 
-		if (index == num_letters)
+		if (index == num_letters) {
 			index = 0;
-		else
-			index++;
+			continue;
+		};
+
+		index++;
 
 
 		shift_letter = alphabet[index];
@@ -50,6 +56,6 @@ char *cipher_shift_wrapper(char *shift_word, int shift_num) {
 
 void main() {
 
-	char shift_word[] = "abc";
+	char shift_word[] = "abc and bcd";
 	printf("%s", cipher_shift_wrapper(shift_word, 1));
 };
