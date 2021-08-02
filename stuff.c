@@ -6,11 +6,10 @@ char cipher_shift(char shift_letter, int shift_num) {
 
 	// This is the alphabet
 	const char alphabet[] = "abcdefghijklmnopqrstuvwxyz";
-//	printf("%c\n", alphabet[sizeof(alphabet) - 2]);
 
 	// Number of letters in the alphabet
-	// -2 because string has null terminate
-	int num_letters = sizeof(alphabet) - 2;
+	// -1 because string has null terminate
+	int num_letters = strlen(alphabet) - 1;
 
 	char *tmp;
 	int index;
@@ -36,8 +35,21 @@ char cipher_shift(char shift_letter, int shift_num) {
 	return shift_letter;
 };
 
+
+char *cipher_shift_wrapper(char *shift_word, int shift_num) {
+
+	int i;
+	for(i = 0; i < (strlen(shift_word)); i++) {
+		shift_word[i] = cipher_shift(shift_word[i], shift_num);
+	};
+
+	return shift_word;
+
+};
+
+
 void main() {
 
-	printf("%c", cipher_shift('z', 1));
-
+	char shift_word[] = "abc";
+	printf("%s", cipher_shift_wrapper(shift_word, 1));
 };
